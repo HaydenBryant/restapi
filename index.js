@@ -1,10 +1,13 @@
 const express = require('express')
 
-const port = process.env.PORT || 5000;
-
 const app = express();
 
-app.listen(process.env.PORT || 5000, function () {
+app.get('/api', function(req, res){
+    console.log('GET request');
+    res.send({name: 'Yoshi'}); 
+});
+
+app.listen(process.env.PORT || 4000, function () {
     
     console.log(`Now listening for requests`);
     
