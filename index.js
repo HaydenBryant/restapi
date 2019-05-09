@@ -6,7 +6,13 @@ const mongoose = require('mongoose');
 const app = express();
 
 // connect to mongodb
-mongoose.connect('mongodb://localhost/ninjago');
+var promise = mongoose.connect('mongodb://haydenbryant1031-haydenbryant.c9users.io', {
+  useMongoClient: true,
+  /* other options */
+});
+
+
+// mongoose.connect('mongodb://haydenbryant1031-haydenbryant.c9users.io/ninjago');
 mongoose.Promise = global.Promise;
 
 // use body-parser middleware
@@ -16,10 +22,10 @@ app.use(bodyParser.json());
 app.use('/api', require('./routes/api'));
 
 // error handling middleware
-// app.use(function(err, req, res, next){
-//     console.log(err); // to see properties of message in our console
-//     res.status(422).send({error: err.message});
-// });
+app.use(function(err, req, res, next){
+    console.log(err); // to see properties of message in our console
+    res.status(422).send({error: err.message});
+});
 
 // listen for requests
 app.listen(process.env.PORT || 4000, function(){
